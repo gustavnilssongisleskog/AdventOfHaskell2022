@@ -1,6 +1,6 @@
 module Day05 where
 
-path = "input/5.in"
+path = "input/05.in"
 cols = 9
 rows = 8
 

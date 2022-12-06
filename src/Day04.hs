@@ -1,7 +1,7 @@
 module Day04 where
 import Utils(split, listToTuple)
 
-path = "input/4.in"
+path = "input/04.in"
 
 func = do
     content <- readFile path

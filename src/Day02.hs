@@ -1,7 +1,7 @@
 module Day02 where
 
 
-path = "input/2.in"
+path = "input/02.in"
 
 func = do
     content <- readFile path

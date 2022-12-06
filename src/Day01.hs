@@ -2,7 +2,7 @@ module Day01 where
 import Data.List(sort)
 import Utils(split)
 
-path = "input/1.in"
+path = "input/01.in"
 
 func = do
     content <- readFile path

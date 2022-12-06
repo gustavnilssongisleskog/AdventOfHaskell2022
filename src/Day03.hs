@@ -2,7 +2,7 @@ module Day03 where
 import Data.Char(ord)
 import Utils(partitionPieceLength)
 
-path = "input/3.in"
+path = "input/03.in"
 
 func = do
     content <- readFile path
