@@ -12,6 +12,8 @@ partitionPieceLength :: Int -> [a] -> [[a]]
 partitionPieceLength _ [] = []
 partitionPieceLength n xs = take n xs : partitionPieceLength n (drop n xs)
 
-
 listToTuple :: [a] -> (a,a)
 listToTuple xs = (xs !! 0, xs !! 1)
+
+trim :: String -> String
+trim = reverse . dropWhile (or . zipWith (==) " \n" . replicate 2) . reverse . dropWhile (or . zipWith (==) " \n" . replicate 2)
