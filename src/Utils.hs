@@ -17,3 +17,10 @@ listToTuple xs = (xs !! 0, xs !! 1)
 
 trim :: String -> String
 trim = reverse . dropWhile (or . zipWith (==) " \n" . replicate 2) . reverse . dropWhile (or . zipWith (==) " \n" . replicate 2)
+
+transpose :: [[a]] -> [[a]]
+transpose ([]:_) = []
+transpose xss = map head xss : transpose (map tail xss)
+
+matrixMax :: Ord a => [[a]] -> a
+matrixMax = maximum . map maximum
