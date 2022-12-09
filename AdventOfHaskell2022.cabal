@@ -33,6 +33,7 @@ library
       Day06
       Day07
       Day08
+      Day09
       Utils
   other-modules:
       Paths_AdventOfHaskell2022
