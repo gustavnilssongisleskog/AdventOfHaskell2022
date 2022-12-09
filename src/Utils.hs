@@ -1,4 +1,5 @@
 module Utils where
+import Data.List(singleton)
 
 split :: Eq a => a -> [a] -> [[a]]
 split x xs = split' x xs [] where
@@ -12,9 +13,6 @@ partitionPieceLength :: Int -> [a] -> [[a]]
 partitionPieceLength _ [] = []
 partitionPieceLength n xs = take n xs : partitionPieceLength n (drop n xs)
 
-listToTuple :: [a] -> (a,a)
-listToTuple xs = (xs !! 0, xs !! 1)
-
 trim :: String -> String
 trim = reverse . dropWhile (or . zipWith (==) " \n" . replicate 2) . reverse . dropWhile (or . zipWith (==) " \n" . replicate 2)
 
@@ -24,3 +22,9 @@ transpose xss = map head xss : transpose (map tail xss)
 
 matrixMax :: Ord a => [[a]] -> a
 matrixMax = maximum . map maximum
+
+listToTuple :: [a] -> (a,a)
+listToTuple = head . uncurry zip . splitAt 1
+
+tupleToList :: (a,a) -> [a]
+tupleToList = uncurry (++) . unzip . singleton
