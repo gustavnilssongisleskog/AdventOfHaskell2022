@@ -41,7 +41,6 @@ neighbors = flip map (zip [-1,-1,-1,0,0,0,1,1,1] [-1,0,1,-1,0,1,-1,0,1]) . tuple
 
 moveTail :: (Int,Int) -> (Int,Int) -> (Int,Int)
 moveTail h t = if distanceSquared h t <= 2 then t else minimumBy (distanceSquared h) (neighbors t)
---moveTail = flip $ flip (minimumBy . (euclidean .) . tupleSubtract) . neighbors
 
 instructionsToHeadPoss :: [(Int, Int)] -> [(Int, Int)]
 instructionsToHeadPoss = scanl tupleAdd (0,0)
