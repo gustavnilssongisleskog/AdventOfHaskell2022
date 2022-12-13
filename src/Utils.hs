@@ -30,12 +30,27 @@ tupleToList :: (a,a) -> [a]
 tupleToList = uncurry (++) . unzip . singleton
 
 numUnique :: Ord a => [a] -> Int
-numUnique xs = length xs - duplicatesSorted (sort xs) where
-    duplicatesSorted (a:b:xs) = (if a == b then 1 else 0) + duplicatesSorted (b:xs)
-    duplicatesSorted _ = 0
+numUnique = length . unique
 
 minimumBy :: Ord b => (a -> b) -> [a] -> a
 minimumBy f xs = minimumBy' f (tail xs) (head xs, f $ head xs) where
     minimumBy' ::  Ord b => (a -> b) -> [a] -> (a,b) -> a
     minimumBy' f (x:xs) (minKey,minVal) = if f x < minVal then minimumBy' f xs (x, f x) else minimumBy' f xs (minKey, minVal)
     minimumBy' _ [] (minKey,minVal) = minKey
+
+unique :: Ord a => [a] -> [a]
+unique = unique' . sort where
+    unique' :: Eq a => [a] -> [a]
+    unique' (a:b:xs) = if a /= b then a:unique' (b:xs) else unique' (b:xs)
+    unique' xs = xs
+
+notIn :: Ord a => [a] -> [a] -> [a]
+notIn xs ys = notIn' (sort xs) (sort ys) where
+    notIn' (x:xs) (y:ys)
+        | x < y = x : notIn' xs (y:ys)
+        | x == y = notIn' xs (y:ys)
+        | x > y = notIn' (x:xs) ys
+    notIn' xs _ = xs
+
+index :: Eq a => a -> [a] -> Int
+index x (y:ys) = if x == y then 0 else 1 + index x ys
