@@ -19,7 +19,7 @@ seeFromLeft = seeFromLeft' (-1) where
     seeFromLeft' _ [] = []
 
 seeFromAnyWhere :: [[Int]] -> [[Bool]]
-seeFromAnyWhere xss = foldl1 (zipWith $ zipWith (||)) $ zipWith ($) [id, map reverse, transpose, transpose . map reverse] $ map (map seeFromLeft) [xss, map reverse xss, transpose xss, map reverse $ transpose xss]
+seeFromAnyWhere = foldl1 (zipWith $ zipWith (||)) . zipWith ($) [id, map reverse, transpose, transpose . map reverse] . map (map seeFromLeft) . zipWith ($) [id, map reverse, transpose, map reverse . transpose] . replicate 4
 
 countBools :: [[Bool]] -> Int
 countBools = sum . map (length . filter id)
